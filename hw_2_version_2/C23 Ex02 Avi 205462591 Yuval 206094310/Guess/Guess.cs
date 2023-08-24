@@ -29,7 +29,7 @@ namespace Ex02
 
             for (int i = 0; i < FidbackOnPlayerGuess.Length; i++)
             {
-                if (i_SecretCode.GetCode.Contains(i_PlayerGuess.GetGuessValue[i]))
+                if (i_SecretCode.GetCode.Contains(this.GetGuessValue[i]))
                 {
                     if (i_SecretCode.GetCode[i] == this.GetGuessValue[i])
                     {
