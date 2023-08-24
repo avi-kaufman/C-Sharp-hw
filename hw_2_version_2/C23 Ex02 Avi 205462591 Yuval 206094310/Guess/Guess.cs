@@ -1,12 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Guess
+
+namespace Ex02
 {
-    internal class Guess
+    public class Guess
     {
+        private char[] m_Guess;
+
+        public Guess(char[] i_GuessInput)
+        {
+            m_Guess = i_GuessInput;
+        }
+
+        public char[] GuessValue
+        {
+            get { return m_Guess; }
+            set { m_Guess = value; }
+
+        }
+
+        
     }
 }
