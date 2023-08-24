@@ -12,26 +12,26 @@ namespace Ex02
             m_Guess = i_GuessInput;
         }
 
-        public char[] GetGuessValue
+        public char[] GetGuess
         {
             get { return m_Guess; }
 
         }
 
-        public char[] SetGuessValue
+        public char[] SetGuess
         {
             set { m_Guess = value; }
         }
 
         public static char[] GetFidbackOnGuess(SecretCode i_SecretCode)
         {
-            char[] FidbackOnPlayerGuess = new char[this.GetGuessValue.Length];
+            char[] FidbackOnPlayerGuess = new char[this.GetGuess.Length];
 
             for (int i = 0; i < FidbackOnPlayerGuess.Length; i++)
             {
-                if (i_SecretCode.GetCode.Contains(this.GetGuessValue[i]))
+                if (i_SecretCode.GetCode.Contains(this.GetGuess[i]))
                 {
-                    if (i_SecretCode.GetCode[i] == this.GetGuessValue[i])
+                    if (i_SecretCode.GetCode[i] == this.GetGuess[i])
                     {
                         FidbackOnPlayerGuess.Append('V');
                     }

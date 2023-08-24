@@ -19,6 +19,11 @@ namespace Ex02
             m_FidbackOnPlayerGuesses = new char[i_MaxNumberOfGuesses, i_SizeOfSecretCode];
         }
 
+        public static SecretCode GetCode
+        {
+            get { return m_SecretCode.GetCode; }
+        }
+
         public static char[] GetPlayerGuesses
         {
             get { return m_PlayerGuesses}
