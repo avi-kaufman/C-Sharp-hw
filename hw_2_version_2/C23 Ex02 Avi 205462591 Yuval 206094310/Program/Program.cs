@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Program
 {
-    internal class Program
+    public class Program
     {
+        public static void Main(string[] args)
+        {
+            /// new Game();
+        }
     }
 }

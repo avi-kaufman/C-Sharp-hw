@@ -10,7 +10,7 @@ namespace Ex02
     {
         private SecretCode m_SecretCode;
         private Guess[] m_PlayerGuesses;
-        private char[,] m_FidbackOnPlayerGuesses;
+        private char[][] m_FidbackOnPlayerGuesses;
 
         public Board(char[] i_CharArrayToGenerateSecretCodeFrom, int i_SizeOfSecretCode, int i_MaxNumberOfGuesses)
         {
@@ -19,32 +19,20 @@ namespace Ex02
             m_FidbackOnPlayerGuesses = new char[i_MaxNumberOfGuesses, i_SizeOfSecretCode];
         }
 
-
-
-        public char[] GetFidbackOnGuess(Guess i_PlayerGuess)
+        public static char[] GetPlayerGuesses
         {
-            char[] FidbackOnPlayerGuess = new char[i_PlayerGuess.GuessValue.Length];
-
-            for(int i = 0; i < FidbackOnPlayerGuess.Length; i++)
-            {
-                if (this.m_SecretCode.GetCode.Contains(i_PlayerGuess.GuessValue[i]))
-                {
-                    if (this.m_SecretCode.GetCode[i] == i_PlayerGuess.GuessValue[i])
-                    {
-                        FidbackOnPlayerGuess.Append('V');
-                    }
-                    else
-                    {
-                        FidbackOnPlayerGuess.Append('X');
-                    }
-                }
-            }
-
-            Array.Sort(FidbackOnPlayerGuess);
-
-            return FidbackOnPlayerGuess;
-           
+            get { return m_PlayerGuesses}
+        }
+        
+        public static Guess[] AppendGuess
+        {
+            set { m_PlayerGuesses.Append(value);
+                  m_FidbackOnPlayerGuesses.Append(value.GetFidbackOnGuess(m_SecretCode)); }
         }
 
+        public static char[][] GetFidbackOnPlayerGuesses
+        {
+            get { return m_FidbackOnPlayerGuesses; }
+        }
     }
 }
