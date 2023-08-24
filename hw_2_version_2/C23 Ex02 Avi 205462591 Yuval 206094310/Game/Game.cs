@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex02
+namespace Game
 {
-    public class Board
+    internal class Game
     {
-        new 
     }
 }

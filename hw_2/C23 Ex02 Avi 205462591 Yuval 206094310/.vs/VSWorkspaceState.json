@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Game\\bin\\Release",
+    "\\Game\\obj\\Debug",
+    "\\SecretCode\\bin",
+    "\\SecretCode\\bin\\Debug",
+    "\\SecretCode\\bin\\Release",
+    "\\SecretCode\\obj",
+    "\\Ui"
+  ],
+  "SelectedNode": "\\Ui\\Ui.cs",
+  "PreviewInSolutionExplorer": false
+}

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex02
+namespace SecretCode
 {
-    public class Board
+    internal class SecretCode
     {
-        new 
     }
 }

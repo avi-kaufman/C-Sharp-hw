@@ -12,10 +12,15 @@ namespace Ex02
             m_Guess = i_GuessInput.ToCharArray();
         }
 
-        public char[] Guess
+        public char[] GetGuessValue
         { 
             get { return m_Guess; }
-            set { return m_Guess = value; }     /// We want to anable set option?? ///  
+                 
+        }
+
+        public void SetGuessValue
+        {
+            set { return m_Guess = value; }
         }
     }
 }
