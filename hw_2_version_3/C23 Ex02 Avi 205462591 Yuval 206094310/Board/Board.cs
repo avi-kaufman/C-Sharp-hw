@@ -10,37 +10,40 @@ namespace Ex02
     {
         private SecretCode m_SecretCode;
         private Guess[] m_PlayerGuesses;
-        private char[][] m_FidbackOnGuesses;
+        private char[,] m_FidbackOnGuesses;
+        private int m_PlayerGuessesCount;
 
         public Board(char[] i_CharArrayToGenerateSecretCodeFrom, int i_SizeOfSecretCode, int i_MaxNumberOfGuesses)
         {
             m_SecretCode = new SecretCode(i_CharArrayToGenerateSecretCodeFrom, i_SizeOfSecretCode);
             m_PlayerGuesses = new Guess[i_MaxNumberOfGuesses];
             m_FidbackOnGuesses = new char[i_MaxNumberOfGuesses, i_SizeOfSecretCode];
+            m_PlayerGuessesCount = 0;
         }
 
-        public static SecretCode GetCode
+        public SecretCode GetCode
         {
-            get { return m_SecretCode.GetCode; }
+            get { return this.m_SecretCode; }
         }
 
-        public static char[] GetPlayerGuesses
+        public Guess[] GetPlayerGuesses
         {
-            get { return m_PlayerGuesses}
+            get { return this.m_PlayerGuesses; }
         }
 
-        public static Guess[] AppendGuess
+        public Guess AppendGuess
         {
             set
             {
-                m_PlayerGuesses.Append(value);
-                m_FidbackOnGuesses.Append(value.GetFidbackOnGuess(m_SecretCode));
+                m_PlayerGuesses[m_PlayerGuessesCount] = value;
+                m_FidbackOnGuesses[m_PlayerGuessesCount] = value.GetFidbackOnGuess(m_SecretCode);
+                m_PlayerGuessesCount++;
             }
         }
 
-        public static char[][] GetFidbackOnGuesses
+        public char[,] GetFidbackOnGuesses
         {
-            get { return m_FidbackOnGuesses; }
+            get { return this.m_FidbackOnGuesses; }
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-
+﻿using System.Linq;
+using System;
 
 namespace Ex02
 {
@@ -8,30 +8,25 @@ namespace Ex02
         private char[] m_Guess;
 
         public Guess(char[] i_GuessInput)
-        {/// Need to cast input from string to char[] in Game 
+        {
             m_Guess = i_GuessInput;
         }
 
-        public char[] GetGuess
+        public char[] GuessValue
         {
             get { return m_Guess; }
-
-        }
-
-        public char[] SetGuess
-        {
             set { m_Guess = value; }
         }
 
-        public static char[] GetFidbackOnGuess(SecretCode i_SecretCode)
+        public char[] GetFidbackOnGuess(SecretCode i_SecretCode)
         {
-            char[] FidbackOnGuess = new char[this.GetGuess.Length];
+            char[] FidbackOnGuess = new char[this.m_Guess.Length];
 
             for (int i = 0; i < FidbackOnGuess.Length; i++)
             {
-                if (i_SecretCode.GetCode.Contains(this.GetGuess[i]))
+                if (i_SecretCode.GetCode.Contains(this.m_Guess[i]))
                 {
-                    if (i_SecretCode.GetCode[i] == this.GetGuess[i])
+                    if (i_SecretCode.GetCode[i] == this.m_Guess[i])
                     {
                         FidbackOnGuess.Append('V');
                     }
@@ -49,3 +44,4 @@ namespace Ex02
         }
     }
 }
+

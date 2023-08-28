@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Program
+
+namespace Ex02
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
+            Game game = new Game();
             do
             {
-                Game game = new Game();
                 game.PlayGame();
-            } while (game.continuePlayFlag);
+            } while (game.m_ContinuePlayFlag);
         }
     }
 }
