@@ -10,7 +10,11 @@ namespace Program
     {
         public static void Main(string[] args)
         {
-            /// new Game();
+            do
+            {
+                Game game = new Game();
+                game.PlayGame();
+            } while (game.continuePlayFlag);
         }
     }
 }

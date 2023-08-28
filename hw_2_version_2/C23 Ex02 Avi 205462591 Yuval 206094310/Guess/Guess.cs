@@ -8,7 +8,7 @@ namespace Ex02
         private char[] m_Guess;
 
         public Guess(char[] i_GuessInput)
-        {
+        {/// Need to cast input from string to char[] in Game 
             m_Guess = i_GuessInput;
         }
 
@@ -24,27 +24,27 @@ namespace Ex02
         }
 
         public static char[] GetFidbackOnGuess(SecretCode i_SecretCode)
-        {
-            char[] FidbackOnPlayerGuess = new char[this.GetGuess.Length];
+        {           
+            char[] FidbackOnGuess = new char[this.GetGuess.Length];
 
-            for (int i = 0; i < FidbackOnPlayerGuess.Length; i++)
+            for (int i = 0; i < FidbackOnGuess.Length; i++)
             {
                 if (i_SecretCode.GetCode.Contains(this.GetGuess[i]))
                 {
                     if (i_SecretCode.GetCode[i] == this.GetGuess[i])
                     {
-                        FidbackOnPlayerGuess.Append('V');
+                        FidbackOnGuess.Append('V');
                     }
                     else
                     {
-                        FidbackOnPlayerGuess.Append('X');
+                        FidbackOnGuess.Append('X');
                     }
                 }
             }
 
-            Array.Sort(FidbackOnPlayerGuess);
+            Array.Sort(FidbackOnGuess);
 
-            return FidbackOnPlayerGuess;
+            return FidbackOnGuess;
 
         }
     }

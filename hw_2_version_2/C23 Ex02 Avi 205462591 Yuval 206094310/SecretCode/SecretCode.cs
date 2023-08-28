@@ -8,7 +8,7 @@ namespace Ex02
 {
     public class SecretCode
     {
-        private Char[] m_CodeToGuess;
+        private Char[] m_CodeToGuess = new char[];
 
         public SecretCode(char[] i_CharArrayToGenerateSecretCodeFrom, int i_SizeOfSecretCode)
         {
