@@ -1,16 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Board",
     "\\Board\\bin",
     "\\Board\\bin\\Debug",
     "\\Board\\bin\\Release",
-    "\\Board\\obj",
-    "\\Board\\obj\\Debug",
     "\\Board\\obj\\Debug\\TempPE",
-    "\\Board\\obj\\Release",
-    "\\Game"
+    "\\Board\\obj\\Release"
   ],
-  "SelectedNode": "\\Game\\Game.cs",
+  "SelectedNode": "\\Game",
   "PreviewInSolutionExplorer": false
 }
