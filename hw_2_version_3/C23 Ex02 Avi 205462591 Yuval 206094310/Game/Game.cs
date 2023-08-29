@@ -28,7 +28,6 @@ namespace Ex02
             m_StartGame = false;
             m_ContinuePlayFlag = true;
             m_VictoryFlag = false;
-            m_Board = new Board(m_CharArrayToGenerateSecretCodeFrom, m_SizeOfSecretCode);
         }
 
         public bool ContinuePlay
@@ -42,6 +41,7 @@ namespace Ex02
             this.m_StartGame = false;
             this.m_ContinuePlayFlag = true;
             this.m_VictoryFlag = false;
+            this.m_Board = new Board(m_CharArrayToGenerateSecretCodeFrom, m_SizeOfSecretCode);
 
             SetDesiredMaxNumOfGuesses();
 
@@ -128,7 +128,7 @@ namespace Ex02
                     }
                     else
                     {
-                        OutputString = String.Format("Its seems like the number you have enterd isnt between {0} to {1}. Please try again!", m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
+                        OutputString = string.Format("Its seems like the number you have enterd isnt between {0} to {1}. Please try again!", m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
                         Console.WriteLine(OutputString);
                     }
                 }
