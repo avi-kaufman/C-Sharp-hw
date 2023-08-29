@@ -35,5 +35,22 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Game.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Board\Board.csproj">
+      <Project>{c23220ae-0caf-45e0-83aa-7089035a31e5}</Project>
+      <Name>Board</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Guess\Guess.csproj">
+      <Project>{676bdc78-1469-42b6-8faf-3ea0e08afe3c}</Project>
+      <Name>Guess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecretCode\SecretCode.csproj">
+      <Project>{6f5f98ea-3ed0-4403-9bf9-04acfd4df9c9}</Project>
+      <Name>SecretCode</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

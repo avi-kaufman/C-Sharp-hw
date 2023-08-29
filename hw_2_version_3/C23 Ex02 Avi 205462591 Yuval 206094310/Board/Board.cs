@@ -1,49 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Ex02
 {
     public class Board
     {
         private SecretCode m_SecretCode;
-        private Guess[] m_PlayerGuesses;
-        private char[,] m_FidbackOnGuesses;
-        private int m_PlayerGuessesCount;
-
-        public Board(char[] i_CharArrayToGenerateSecretCodeFrom, int i_SizeOfSecretCode, int i_MaxNumberOfGuesses)
+        private List<Guess> m_PlayerGuesses;
+        private List<List<char>> m_FeedbackOnGuesses;
+        
+        public Board(char[] i_CharArrayToGenerateSecretCodeFrom, int i_SizeOfSecretCode)
         {
             m_SecretCode = new SecretCode(i_CharArrayToGenerateSecretCodeFrom, i_SizeOfSecretCode);
-            m_PlayerGuesses = new Guess[i_MaxNumberOfGuesses];
-            m_FidbackOnGuesses = new char[i_MaxNumberOfGuesses, i_SizeOfSecretCode];
-            m_PlayerGuessesCount = 0;
+            m_PlayerGuesses = new List<Guess>();
+            m_FeedbackOnGuesses = new List<List<char>>();
         }
 
-        public SecretCode GetCode
+        public SecretCode SecretCode
         {
             get { return this.m_SecretCode; }
         }
 
-        public Guess[] GetPlayerGuesses
+        public List<Guess> PlayerGuesses
         {
             get { return this.m_PlayerGuesses; }
         }
 
-        public Guess AppendGuess
+        public List<List<char>> FeedbackOnGuesses
         {
-            set
-            {
-                m_PlayerGuesses[m_PlayerGuessesCount] = value;
-                m_FidbackOnGuesses[m_PlayerGuessesCount] = value.GetFidbackOnGuess(m_SecretCode);
-                m_PlayerGuessesCount++;
-            }
+            get { return this.m_FeedbackOnGuesses; }
         }
-
-        public char[,] GetFidbackOnGuesses
+        public void AddGuess(Guess i_Guess)
         {
-            get { return this.m_FidbackOnGuesses; }
+            m_PlayerGuesses.Add(i_Guess);
+            m_FeedbackOnGuesses.Add(i_Guess.GetFeedbackOnGuess(m_SecretCode));
         }
     }
 }

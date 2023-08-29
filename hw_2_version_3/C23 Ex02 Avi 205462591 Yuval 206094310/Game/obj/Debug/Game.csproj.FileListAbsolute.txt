@@ -1,0 +1,2 @@
+C:\Users\User\Desktop\school\third_year\c#_hw\hw_2_version_3\C23 Ex02 Avi 205462591 Yuval 206094310\Game\obj\Debug\Game.csproj.AssemblyReference.cache
+C:\Users\User\Desktop\school\third_year\c#_hw\hw_2_version_3\C23 Ex02 Avi 205462591 Yuval 206094310\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache

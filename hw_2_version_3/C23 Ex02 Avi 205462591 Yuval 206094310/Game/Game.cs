@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex02
 {
@@ -12,10 +10,10 @@ namespace Ex02
         private int m_SizeOfSecretCode;
         private int m_MaxNumberOfGuesses;
         private int m_MinNumberOfGuesses;
-        private int m_NumOfGuesses;
+        private int m_NumOfDesiredGuesses;
         private int m_CurrentGuess;
         private bool m_StartGame;
-        public bool m_ContinuePlayFlag;
+        private bool m_ContinuePlayFlag;
         private bool m_VictoryFlag;
         private Board m_Board;
 
@@ -25,22 +23,32 @@ namespace Ex02
             m_SizeOfSecretCode = 4;
             m_MaxNumberOfGuesses = 10;
             m_MinNumberOfGuesses = 4;
-            m_NumOfGuesses = 0;
+            m_NumOfDesiredGuesses = 0;
             m_CurrentGuess = 0;
             m_StartGame = false;
             m_ContinuePlayFlag = true;
             m_VictoryFlag = false;
-            m_Board = new Board(m_CharArrayToGenerateSecretCodeFrom, m_SizeOfSecretCode, m_MaxNumberOfGuesses);
+            m_Board = new Board(m_CharArrayToGenerateSecretCodeFrom, m_SizeOfSecretCode);
+        }
+
+        public bool ContinuePlay
+        {
+            get { return m_ContinuePlayFlag; }
         }
 
         public void PlayGame()
         {
-            SetNumOfGuesses();
+            this.m_CurrentGuess = 0;
+            this.m_StartGame = false;
+            this.m_ContinuePlayFlag = true;
+            this.m_VictoryFlag = false;
+
+            SetDesiredMaxNumOfGuesses();
 
             string UserInputString;
             string OutputString;
 
-            while (this.m_CurrentGuess <= this.m_NumOfGuesses && this.m_ContinuePlayFlag && !this.m_VictoryFlag)
+            while (this.m_CurrentGuess <= this.m_NumOfDesiredGuesses && this.m_ContinuePlayFlag && !this.m_VictoryFlag)
             {
                 string CharsToCooseFrom = string.Join(" ", m_CharArrayToGenerateSecretCodeFrom);
                 OutputString = String.Format("Please type your guess <{0}> or 'Q' to quit", CharsToCooseFrom);
@@ -53,15 +61,18 @@ namespace Ex02
                     break;
                 }
 
-                if (IsInputValid(UserInputString))
-                {
-                    Guess userGuess = new Guess(UserInputString.ToCharArray());
-                    this.m_Board.AppendGuess = userGuess;
+                if (IsGuessValid(UserInputString))
+                {   
+                    List<char> InputStringToListOfChars = new List<char>();
+                    InputStringToListOfChars.AddRange(UserInputString);
+                    Guess UserNewGuess = new Guess(InputStringToListOfChars);
+                    this.m_Board.AddGuess(UserNewGuess);
                     m_CurrentGuess++;
 
-                    //PRINT HERE THE BOARD//
+                    ClearBoard();
+                    this.PrintBoard();
 
-                    if (IsVictory())
+                    if (IsPlayerVictory())
                     {
                         m_VictoryFlag = true;
                         OutputString = String.Format("You guessed after {0} steps!\nWould you like to start a new game? <Y/N>", m_CurrentGuess);
@@ -76,11 +87,13 @@ namespace Ex02
                 }
             }
 
-            if (m_CurrentGuess == m_MaxNumberOfGuesses && m_ContinuePlayFlag)
+            if (this.m_CurrentGuess == this.m_NumOfDesiredGuesses && m_ContinuePlayFlag)
             {
-                //PRINT HERE THE BOARD//
+                ClearBoard();
+                this.PrintBoard();
 
-                Console.WriteLine("No more guesses allowed. You Lost.\nWould you like to start a new game <Y/N>?");
+                OutputString = "No more guesses allowed. You Lost.\nWould you like to start a new game <Y/N>?";
+                Console.WriteLine(OutputString);
                 if (!CheckForNewGame())
                 {
                     m_ContinuePlayFlag = false;
@@ -88,26 +101,26 @@ namespace Ex02
             }
         }
 
-        private void SetNumOfGuesses()
+        private void SetDesiredMaxNumOfGuesses()
         {
-            string userInputString = "";
-            string outputString = "";
+            string UserInputString = "";
+            string OutputString = "";
 
             while (!this.m_StartGame)
             {
-                outputString = String.Format("Please type the maximum number of guesses between {0} to {1} for the game.", m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
-                Console.WriteLine(outputString);
-                userInputString = Console.ReadLine();
+                OutputString = String.Format("Please type the maximum number of guesses between {0} to {1} for the game.", m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
+                Console.WriteLine(OutputString);
+                UserInputString = Console.ReadLine();
 
-                if (IsQuit(userInputString))
+                if (IsQuit(UserInputString))
                 {
                     m_ContinuePlayFlag = false;
                     break;
                 }
 
-                if (int.TryParse(userInputString, out m_NumOfGuesses))
+                if (int.TryParse(UserInputString, out m_NumOfDesiredGuesses))
                 {
-                    if (this.m_NumOfGuesses >= this.m_MinNumberOfGuesses && this.m_NumOfGuesses <= this.m_MaxNumberOfGuesses)
+                    if (this.m_NumOfDesiredGuesses >= this.m_MinNumberOfGuesses && this.m_NumOfDesiredGuesses <= this.m_MaxNumberOfGuesses)
                     {
                         m_StartGame = true;
                         ClearBoard();
@@ -115,27 +128,27 @@ namespace Ex02
                     }
                     else
                     {
-                        outputString = String.Format("Its seems like the number you have enterd isnt between {0} to {1}. Please try again!", m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
-                        Console.WriteLine(outputString);
+                        OutputString = String.Format("Its seems like the number you have enterd isnt between {0} to {1}. Please try again!", m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
+                        Console.WriteLine(OutputString);
                     }
                 }
                 else
                 {
-                    outputString = "Its seems like you have enterd an invalid input. Please try again!";
-                    Console.WriteLine(outputString);
+                    OutputString = string.Format("{0} is invalid input. Please type the maximum number of guesses between {1} to {2} for the game.", UserInputString, m_MinNumberOfGuesses, m_MaxNumberOfGuesses);
+                    Console.WriteLine(OutputString);
                 }
             }
         }
 
-        private bool IsInputValid(string i_input)
+        private bool IsGuessValid(string i_InputGuess)
         {
-            if (i_input.Distinct().Count() != m_SizeOfSecretCode)
+            if (i_InputGuess.Length != m_SizeOfSecretCode || i_InputGuess.Distinct().Count() != m_SizeOfSecretCode)
             {
                 return false;
             }
-            foreach (char c in i_input)
+            foreach (char c in i_InputGuess)
             {
-                if (c < m_CharArrayToGenerateSecretCodeFrom[0] || c > m_CharArrayToGenerateSecretCodeFrom[m_CharArrayToGenerateSecretCodeFrom.Length - 1])
+                if (!m_CharArrayToGenerateSecretCodeFrom.Contains(c))
                 {
                     return false;
                 }
@@ -155,18 +168,18 @@ namespace Ex02
             }
         }
 
-        public static bool CheckForNewGame()
+        private static bool CheckForNewGame()
         {
             bool ReturnValidAnswer = false;
             while (!ReturnValidAnswer)
             {
                 string PlayerInput = Console.ReadLine();
 
-                if (string.Equals(PlayerInput,'Y'))
+                if (string.Equals(PlayerInput,"Y"))
                 {
                     return true;
                 }
-                if (string.Equals(PlayerInput, 'N') || IsQuit(PlayerInput))
+                if (string.Equals(PlayerInput, "N") || IsQuit(PlayerInput))
                 {
                     return false;
                 }
@@ -178,11 +191,12 @@ namespace Ex02
             return ReturnValidAnswer;
         }
 
-        private bool IsVictory()
+        private bool IsPlayerVictory()
 
         {
-            foreach(char c in this.m_Board.GetFidbackOnGuesses[this.m_CurrentGuess])
-            if (this.m_Board.GetFidbackOnGuesses[this.m_CurrentGuess - 1][1] == ['V', 'V', 'V', 'V'])
+            List<char> VictoryList = Enumerable.Repeat('V', m_SizeOfSecretCode).ToList();
+
+            if (this.m_Board.FeedbackOnGuesses.Last().SequenceEqual(VictoryList))
             {
                 return true;
             }
@@ -204,27 +218,29 @@ namespace Ex02
             Console.WriteLine("");
             Console.WriteLine("|Pins:    |Result:|");
             Console.WriteLine("|=========|=======|");
-            if (m_CurrentGuess == m_MaxNumberOfGuesses)
+            if (m_CurrentGuess == m_NumOfDesiredGuesses)
             {
-                string printSecretCode = string.Join(" ", m_Board.GetCode);
-                Console.WriteLine(String.Format("|{0}|       |", printSecretCode));
+                string SecretCode = string.Join(" ", this.m_Board.SecretCode.GetCode);
+                Console.WriteLine(String.Format("|{0}|       |", SecretCode));
                 Console.WriteLine("|=========|=======|");
 
             }
             else
-            {
-                Console.WriteLine("| # # # # |       |");
+            {   
+                string HiddenSecretCode = string.Join(" ", Enumerable.Repeat("#", m_SizeOfSecretCode));
+                string OutputHiddenSecretCode = string.Format("| {0} |       |", HiddenSecretCode);
+                Console.WriteLine(OutputHiddenSecretCode);
                 Console.WriteLine("|=========|=======|");
 
             }
             for (int i = 0; i < m_CurrentGuess; i++)
             {
-                string plaerGuess = string.Join(" ", this.m_Board.GetPlayerGuesses[i].GetGuess);
-                string playerFeedback = string.Join(" ", this.m_Board.GetFidbackOnGuess[i,]);
-                Console.WriteLine(String.Format(" |{0} |{1}|", plaerGuess, playerFeedback));
+                string PlayerGuess = string.Join(" ", this.m_Board.PlayerGuesses[i]);
+                string GuessFeedback = string.Join(" ", this.m_Board.FeedbackOnGuesses[i]);
+                Console.WriteLine(String.Format(" |{0} |{1}|", PlayerGuess, GuessFeedback));
                 Console.WriteLine("|=========|=======|");
             }
-            for (int i = 0; i < this.m_NumOfGuesses - this.m_CurrentGuess; i++)
+            for (int i = 0; i < this.m_NumOfDesiredGuesses - this.m_CurrentGuess; i++)
             {
                 Console.WriteLine("|         |       |");
                 Console.WriteLine("|=========|=======|");

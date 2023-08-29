@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace Ex02
+﻿namespace Ex02
 {
     public class Program
     {
@@ -15,7 +8,7 @@ namespace Ex02
             do
             {
                 game.PlayGame();
-            } while (game.m_ContinuePlayFlag);
+            } while (game.ContinuePlay);
         }
     }
 }

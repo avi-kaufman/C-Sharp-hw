@@ -35,5 +35,31 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Board\Board.csproj">
+      <Project>{c23220ae-0caf-45e0-83aa-7089035a31e5}</Project>
+      <Name>Board</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Game\Game.csproj">
+      <Project>{1e2dd99e-977b-4462-a590-c3c5b8704df5}</Project>
+      <Name>Game</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Guess\Guess.csproj">
+      <Project>{676bdc78-1469-42b6-8faf-3ea0e08afe3c}</Project>
+      <Name>Guess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SecretCode\SecretCode.csproj">
+      <Project>{6f5f98ea-3ed0-4403-9bf9-04acfd4df9c9}</Project>
+      <Name>SecretCode</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Ex02.ConsoleUtils">
+      <HintPath>..\..\..\..\..\..\..\..\..\Windows\Temp\Ex02.ConsoleUtils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

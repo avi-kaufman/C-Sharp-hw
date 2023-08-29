@@ -1,33 +1,31 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Ex02
 {
     public class SecretCode
     {
-        private readonly Char[] m_CodeToGuess;
+        private List<char> m_CodeToGuess;
 
         public SecretCode(char[] i_CharArrayToGenerateSecretCodeFrom, int i_SizeOfSecretCode)
         {
-            m_CodeToGuess = new char[i_SizeOfSecretCode];
+            m_CodeToGuess = new List<char>();
 
-            int NumberOfCharactersGenerated = 0;
             Random Random = new Random();
             int RandomIndex;
 
-            while (NumberOfCharactersGenerated < i_SizeOfSecretCode)
+            while (m_CodeToGuess.Count < i_SizeOfSecretCode)
             {
                 RandomIndex = Random.Next(i_CharArrayToGenerateSecretCodeFrom.Length);
 
                 if (!m_CodeToGuess.Contains(i_CharArrayToGenerateSecretCodeFrom[RandomIndex]))
                 {
-                    m_CodeToGuess.Append(i_CharArrayToGenerateSecretCodeFrom[RandomIndex]);
-                    NumberOfCharactersGenerated++;
+                    m_CodeToGuess.Add(i_CharArrayToGenerateSecretCodeFrom[RandomIndex]);
                 }
             }
         }
 
-        public Char[] GetCode
+        public List<char> GetCode
         {
             get { return m_CodeToGuess; }
         }

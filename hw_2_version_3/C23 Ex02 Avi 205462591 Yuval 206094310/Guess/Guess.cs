@@ -1,46 +1,45 @@
-﻿using System.Linq;
-using System;
+﻿using System.Collections.Generic;
 
 namespace Ex02
 {
     public class Guess
     {
-        private char[] m_Guess;
+        private List<char> m_Guess;
 
-        public Guess(char[] i_GuessInput)
+        public Guess(List<char> i_GuessInput)
         {
             m_Guess = i_GuessInput;
         }
 
-        public char[] GuessValue
+
+        public List<char> GuessValue
         {
             get { return m_Guess; }
-            set { m_Guess = value; }
+            ///set { m_Guess = value; } need to think if we need it
         }
 
-        public char[] GetFidbackOnGuess(SecretCode i_SecretCode)
+        public List<char> GetFeedbackOnGuess(SecretCode i_SecretCode)
         {
-            char[] FidbackOnGuess = new char[this.m_Guess.Length];
+            List<char> FidbackOnGuess = new List<char>();
 
-            for (int i = 0; i < FidbackOnGuess.Length; i++)
+            foreach (char c in this.m_Guess)
             {
-                if (i_SecretCode.GetCode.Contains(this.m_Guess[i]))
+                if (i_SecretCode.GetCode.Contains(c))
                 {
-                    if (i_SecretCode.GetCode[i] == this.m_Guess[i])
+                    if (i_SecretCode.GetCode.IndexOf(c) == this.m_Guess.IndexOf(c))
                     {
-                        FidbackOnGuess.Append('V');
+                        FidbackOnGuess.Add('V');
                     }
                     else
                     {
-                        FidbackOnGuess.Append('X');
+                        FidbackOnGuess.Add('X');
                     }
                 }
+                
             }
-
-            Array.Sort(FidbackOnGuess);
+            FidbackOnGuess.Sort();
 
             return FidbackOnGuess;
-
         }
     }
 }
