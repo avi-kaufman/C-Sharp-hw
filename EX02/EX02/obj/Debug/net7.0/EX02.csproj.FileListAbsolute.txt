@@ -1,0 +1,15 @@
+/Users/yuvalgreenshpan/Projects/EX02/EX02/bin/Debug/net7.0/EX02
+/Users/yuvalgreenshpan/Projects/EX02/EX02/bin/Debug/net7.0/EX02.deps.json
+/Users/yuvalgreenshpan/Projects/EX02/EX02/bin/Debug/net7.0/EX02.runtimeconfig.json
+/Users/yuvalgreenshpan/Projects/EX02/EX02/bin/Debug/net7.0/EX02.dll
+/Users/yuvalgreenshpan/Projects/EX02/EX02/bin/Debug/net7.0/EX02.pdb
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.csproj.AssemblyReference.cache
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.GeneratedMSBuildEditorConfig.editorconfig
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.AssemblyInfoInputs.cache
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.AssemblyInfo.cs
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.csproj.CoreCompileInputs.cache
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.dll
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/refint/EX02.dll
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.pdb
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/EX02.genruntimeconfig.cache
+/Users/yuvalgreenshpan/Projects/EX02/EX02/obj/Debug/net7.0/ref/EX02.dll
